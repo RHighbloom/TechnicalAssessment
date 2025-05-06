@@ -1,0 +1,61 @@
+@model TechnicalAssessment.Models.Entities.Student
+@using TechnicalAssessment.Models.Entities
+@{
+    ViewData["Title"] = "Manage Students - Add Student";
+    var schools = ViewData["Schools"] as List<SelectListItem>;
+}
+<h1>@ViewData["Title"]</h1>
+<a class="link-scondary" asp-controller="Home" asp-action="Index">Back To Manage Students</a>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post" class="form-horizontal">
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="School" class="control-label"></label>
+                <select asp-for="School" class="form-control" asp-items="schools"></select>
+                <span asp-validation-for="School" class="text-danger"></span>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSchoolModal">
+                    Add A School
+                </button>
+
+                <div class="modal fade" id="addSchoolModal" tabindex="-1" aria-labelledby="addSchoolModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <partial name="_AddSchoolModal" />
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="Major" class="control-label"></label>
+                <input asp-for="Major" class="form-control" />
+                <span asp-validation-for="Major" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IsActive" class="control-label">Active</label>
+                <input asp-for="IsActive" type="checkbox" class="form-check-input" />
+                <span asp-validation-for="IsActive" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+
+        
+    </script>
+}

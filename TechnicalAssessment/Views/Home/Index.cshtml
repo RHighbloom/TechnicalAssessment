@@ -1,0 +1,56 @@
+﻿@model IEnumerable<TechnicalAssessment.Models.Entities.Student>
+@using TechnicalAssessment.Models.Entities
+@{
+    ViewData["Title"] = "Manage Students";
+    var schools = ViewData["Schools"] as List<School>;
+}
+<h1>@ViewData["Title"]</h1>
+<a class="btn btn-primary" asp-controller="AddStudent" asp-action="Index" role="button">Add Student</a>
+<table   
+  id="table"
+  class="table table-striped table-bordered table-hover">
+    <thead> 
+        <tr>
+            <th><input type="checkbox" id="selectAll"></th>  
+            <th>Name</th>
+            <th>School</th>
+            <th>Major</th>
+            <th>Last Modified</th>
+            <th>Active</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Student student in Model)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" class="row-checkbox">
+                </td>
+                <td>
+                    @student.FullName()
+                </td>
+                <td>
+                    @(schools?.FirstOrDefault(s => s.Id == student.School)?.Name ?? "Unknown School")
+                </td>
+                <td>
+                    @Html.DisplayFor(m => student.Major)
+                </td>
+                <td>
+                    @student.DateModified.ToString("MM/dd/yyyy")
+                </td>   
+               <td>
+                    @(student.IsActive ? "True" : "False")
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+  <script>
+    document.getElementById('selectAll').addEventListener('change', function () {
+      const checkboxes = document.querySelectorAll('.row-checkbox');
+      checkboxes.forEach(cb => cb.checked = this.checked);
+    });
+  </script>
+}

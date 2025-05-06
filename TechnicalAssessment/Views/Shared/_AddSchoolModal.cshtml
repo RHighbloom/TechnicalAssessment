@@ -1,0 +1,78 @@
+@model TechnicalAssessment.Models.Entities.School
+@using TechnicalAssessment.Models.Entities
+@{
+    ViewData["Title"] = "Add School";
+}
+<div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="addSchoolModalLabel">@ViewData["Title"]</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        <form id="addSchoolForm" method="post" asp-controller="AddStudent" asp-action="AddSchool">
+            <div class="mb-3">
+                <label asp-for="Name" class="form-label">School Name</label>
+                <input asp-for="Name" class="form-control" required />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Address1" class="form-label">Address 1</label>
+                <input asp-for="Address1" class="form-control" required />
+                <span asp-validation-for="Address1" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Address2" class="form-label">Address 2</label>
+                <input asp-for="Address2" class="form-control" required />
+                <span asp-validation-for="Address2" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="City" class="form-label">City</label>
+                <input asp-for="City" class="form-control" required />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="State" class="form-label">State</label>
+                <input asp-for="State" class="form-control" required />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ZipCode" class="form-label">Zip Code</label>
+                <input asp-for="ZipCode" class="form-control" required />
+                <span asp-validation-for="ZipCode" class="text-danger"></span>
+            </div>
+        <button type="submit" form="addSchoolForm" class="btn btn-primary" id="btnSubmit">Save</button>
+        </form>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+</div>
+
+@section scripts {
+    <script>
+
+    $(document).ready(function () {
+
+        $("#btnSubmit").click(function () {
+
+            var myformdata = $("#addSchoolForm").serialize();
+           
+            $.ajax({
+
+                type: "POST",
+                url: "/AddStudent/AddSchool",
+                data: myformdata,
+                success: function () {
+                    window.location.href = "/AddStudent/Index";
+
+                }
+
+            })
+        })
+
+    })
+
+
+</script>
+}
